@@ -1,0 +1,122 @@
+//
+//  firstUITableViewController.swift
+//  MRT
+//
+
+import UIKit
+
+class firstUITableViewController: UITableViewController {
+    
+    var LINESections = MAKESECTION()
+    
+    //color setting
+    
+    func LabelColor(LineNumber:String) -> UIColor {
+        if LineNumber.containsString("BR") {
+            return UIColor(red: 158/255, green: 101/255, blue: 46/255, alpha: 1)
+        } else if LineNumber.containsString("G") && !LineNumber.containsString("A") && !LineNumber.containsString("M") {
+            return UIColor(red: 0/255, green: 119/255, blue: 73/255, alpha: 1)
+        } else if LineNumber.containsString("O") {
+            return UIColor(red: 255/255, green: 163/255, blue: 0/255, alpha: 1)
+        } else if LineNumber.containsString("B") && !LineNumber.containsString("R") {
+            return UIColor(red: 0/255, green: 94/255, blue: 184/255, alpha: 1)
+        } else if LineNumber.containsString("R") && !LineNumber.containsString("B") && !LineNumber.containsString("A"){
+            return UIColor(red: 203/255, green: 44/255, blue: 48/255, alpha: 1)
+        } else if LineNumber.containsString("MG") {
+            return UIColor(red: 119/255, green: 185/255, blue: 51/255, alpha: 1)
+        } else if LineNumber.containsString("G03A") {
+            return UIColor(red: 206/255, green: 220/255, blue: 0/255, alpha: 1)
+        } else {
+            return UIColor(red: 248/255, green: 144/255, blue: 165/255, alpha: 1)
+        }
+        
+    }
+
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+    
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return LINESections.count
+    }
+    
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return LINESections[section].STATION.count
+    }
+    
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return LINESections[section].LINE
+    }
+    
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    
+        if LINESections[indexPath.section].STALineNUM[indexPath.row].count == 1 {
+            
+            //一個線的cell
+            
+            let firstCell = tableView.dequeueReusableCellWithIdentifier("line1cell", forIndexPath: indexPath) as! UITableViewCell1
+            
+            firstCell.nameLabel.text = LINESections[indexPath.section].STATION[indexPath.row] as String
+            firstCell.firstLineLabel.text = LINESections[indexPath.section].STALineNUM[indexPath.row][0] as String
+            firstCell.firstLineLabel.backgroundColor = LabelColor(LINESections[indexPath.section].STALineNUM[indexPath.row][0] as String)
+            firstCell.firstLineNameLabel.text = LINESections[indexPath.section].STALineN2[indexPath.row][0] as String
+            
+            firstCell.firstLineLabel.textColor = UIColor.whiteColor()
+            firstCell.firstLineLabel.layer.cornerRadius = 3
+            firstCell.firstLineNameLabel.hidden = true
+            
+            return firstCell
+            
+        } else {
+            
+            //兩個線的cell
+            
+            let secondCell = tableView.dequeueReusableCellWithIdentifier("line2cell", forIndexPath: indexPath) as! UITableViewCell2
+            
+            secondCell.nameLabel.text = LINESections[indexPath.section].STATION[indexPath.row] as String
+            secondCell.firstLineLabel.text = LINESections[indexPath.section].STALineNUM[indexPath.row][0] as String
+            secondCell.secondLineLabel.text = LINESections[indexPath.section].STALineNUM[indexPath.row][1] as String
+            secondCell.firstLineLabel.backgroundColor = LabelColor(LINESections[indexPath.section].STALineNUM[indexPath.row][0] as String)
+            secondCell.secondLineLabel.backgroundColor = LabelColor(LINESections[indexPath.section].STALineNUM[indexPath.row][1] as String)
+            secondCell.firstLineNameLabel.text = LINESections[indexPath.section].STALineN2[indexPath.row][0] as String
+            secondCell.secondLineNameLabel.text = LINESections[indexPath.section].STALineN2[indexPath.row][1] as String
+            
+            secondCell.firstLineLabel.textColor = UIColor.whiteColor()
+            secondCell.secondLineLabel.textColor = UIColor.whiteColor()
+            
+            secondCell.firstLineLabel.layer.cornerRadius = 3
+            secondCell.secondLineLabel.layer.cornerRadius = 3
+            
+            secondCell.firstLineNameLabel.hidden = true
+            secondCell.secondLineNameLabel.hidden = true
+            
+            return secondCell
+        }
+    }
+    
+    //做segue
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+        if segue.identifier == "show1" {
+            let oneLineCell = sender as! UITableViewCell1
+            let destinationController = segue.destinationViewController as! one
+            destinationController.acceptStationName = oneLineCell.nameLabel.text!
+            destinationController.acceptLine = oneLineCell.firstLineNameLabel.text!
+            
+        } else if segue.identifier == "show2" {
+            
+            let twoLineCell = sender as! UITableViewCell2
+            let destinationController = segue.destinationViewController as! two
+            destinationController.acceptStationName = twoLineCell.nameLabel.text!
+            destinationController.acceptFirstLine = twoLineCell.firstLineNameLabel.text!
+            destinationController.acceptSecondLine = twoLineCell.secondLineNameLabel.text!
+            
+        }
+    }
+    
+}
