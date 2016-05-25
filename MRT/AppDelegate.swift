@@ -1,10 +1,8 @@
 //
 //  AppDelegate.swift
-//  mrt
+//  MRT
 //
-//  Created by 黃建翔 on 2016/5/22.
-//  Copyright © 2016年 黃建翔. All rights reserved.
-//
+
 
 import UIKit
 

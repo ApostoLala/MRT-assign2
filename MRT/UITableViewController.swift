@@ -1,5 +1,5 @@
 //
-//  firstUITableViewController.swift
+//  UITableViewController.swift
 //  MRT
 //
 
@@ -7,7 +7,7 @@ import UIKit
 
 class firstUITableViewController: UITableViewController {
     
-    var LINESections = MAKESECTION()
+    var LineSections:[LineData]  = MakingSection()
     
     //color setting
     
@@ -35,6 +35,7 @@ class firstUITableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -42,29 +43,29 @@ class firstUITableViewController: UITableViewController {
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return LINESections.count
+        return LineSections.count
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return LINESections[section].STATION.count
+        return LineSections[section].station.count
     }
     
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return LINESections[section].LINE
+        return LineSections[section].Line
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     
-        if LINESections[indexPath.section].STALineNUM[indexPath.row].count == 1 {
+        if LineSections[indexPath.section].stationlineno[indexPath.row].count == 1 {
             
-            //一個線的cell
+            //one line cell
             
             let firstCell = tableView.dequeueReusableCellWithIdentifier("line1cell", forIndexPath: indexPath) as! UITableViewCell1
             
-            firstCell.nameLabel.text = LINESections[indexPath.section].STATION[indexPath.row] as String
-            firstCell.firstLineLabel.text = LINESections[indexPath.section].STALineNUM[indexPath.row][0] as String
-            firstCell.firstLineLabel.backgroundColor = LabelColor(LINESections[indexPath.section].STALineNUM[indexPath.row][0] as String)
-            firstCell.firstLineNameLabel.text = LINESections[indexPath.section].STALineN2[indexPath.row][0] as String
+            firstCell.nameLabel.text = LineSections[indexPath.section].station[indexPath.row] as String
+            firstCell.firstLineLabel.text = LineSections[indexPath.section].stationlineno[indexPath.row][0] as String
+            firstCell.firstLineLabel.backgroundColor = LabelColor(LineSections[indexPath.section].stationlineno[indexPath.row][0] as String)
+            firstCell.firstLineNameLabel.text = LineSections[indexPath.section].stationlinename[indexPath.row][0] as String
             
             firstCell.firstLineLabel.textColor = UIColor.whiteColor()
             firstCell.firstLineLabel.layer.cornerRadius = 3
@@ -74,17 +75,17 @@ class firstUITableViewController: UITableViewController {
             
         } else {
             
-            //兩個線的cell
+            //two line cell
             
             let secondCell = tableView.dequeueReusableCellWithIdentifier("line2cell", forIndexPath: indexPath) as! UITableViewCell2
             
-            secondCell.nameLabel.text = LINESections[indexPath.section].STATION[indexPath.row] as String
-            secondCell.firstLineLabel.text = LINESections[indexPath.section].STALineNUM[indexPath.row][0] as String
-            secondCell.secondLineLabel.text = LINESections[indexPath.section].STALineNUM[indexPath.row][1] as String
-            secondCell.firstLineLabel.backgroundColor = LabelColor(LINESections[indexPath.section].STALineNUM[indexPath.row][0] as String)
-            secondCell.secondLineLabel.backgroundColor = LabelColor(LINESections[indexPath.section].STALineNUM[indexPath.row][1] as String)
-            secondCell.firstLineNameLabel.text = LINESections[indexPath.section].STALineN2[indexPath.row][0] as String
-            secondCell.secondLineNameLabel.text = LINESections[indexPath.section].STALineN2[indexPath.row][1] as String
+            secondCell.nameLabel.text = LineSections[indexPath.section].station[indexPath.row] as String
+            secondCell.firstLineLabel.text = LineSections[indexPath.section].stationlineno[indexPath.row][0] as String
+            secondCell.secondLineLabel.text = LineSections[indexPath.section].stationlineno[indexPath.row][1] as String
+            secondCell.firstLineLabel.backgroundColor = LabelColor(LineSections[indexPath.section].stationlineno[indexPath.row][0] as String)
+            secondCell.secondLineLabel.backgroundColor = LabelColor(LineSections[indexPath.section].stationlineno[indexPath.row][1] as String)
+            secondCell.firstLineNameLabel.text = LineSections[indexPath.section].stationlinename[indexPath.row][0] as String
+            secondCell.secondLineNameLabel.text = LineSections[indexPath.section].stationlinename[indexPath.row][1] as String
             
             secondCell.firstLineLabel.textColor = UIColor.whiteColor()
             secondCell.secondLineLabel.textColor = UIColor.whiteColor()
@@ -99,7 +100,7 @@ class firstUITableViewController: UITableViewController {
         }
     }
     
-    //做segue
+    //segue
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         if segue.identifier == "show1" {

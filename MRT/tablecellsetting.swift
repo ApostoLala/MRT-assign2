@@ -1,14 +1,8 @@
 //
 //  tablecellsetting.swift
-//  
-//
-//  Created by 黃建翔 on 2016/5/22.
-//
 //
 
 import UIKit
-
-
 
 func Color(LineNumber:String) -> UIColor {
     if LineNumber.containsString("文湖") {
@@ -31,7 +25,7 @@ func Color(LineNumber:String) -> UIColor {
 }
 
 
-//cell1設置
+//cell1
 
 class UITableViewCell1: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
@@ -80,8 +74,7 @@ class one: UIViewController {
     
 }
 
-//-------------------------------------------------------------------------------------
-//cell2設置
+//cell2
 
 class UITableViewCell2: UITableViewCell {
     
