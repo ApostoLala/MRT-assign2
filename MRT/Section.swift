@@ -102,14 +102,14 @@ func MakingSection() -> [LineData] {
     
     var LineDataArray = [LineData]()
     
-    let LINE_1 = LineData(title: "板南線", objects: line1, no: line1no, line: line1name)
-    let LINE_2 = LineData(title: "文湖線", objects: line2, no: line2no, line: line2name)
-    let LINE_3 = LineData(title: "淡水信義線", objects: line3, no: line3no, line: line3name)
+    let LINE_1 = LineData(title: "松山新店線", objects: line1, no: line1no, line: line1name)
+    let LINE_2 = LineData(title: "中和新蘆線", objects: line2, no: line2no, line: line2name)
+    let LINE_3 = LineData(title: "貓空纜車", objects: line3, no: line3no, line: line3name)
     let LINE_4 = LineData(title: "小碧潭支線", objects: line4, no: line4no, line: line4name)
-    let LINE_5 = LineData(title: "新北投支線", objects: line5, no: line5no, line: line5name)
-    let LINE_6 = LineData(title: "中和新蘆線", objects: line6, no: line6no, line: line6name)
-    let LINE_7 = LineData(title: "松山新店線", objects: line7, no: line7no, line: line7name)
-    let LINE_8 = LineData(title: "貓空纜車", objects: line8, no: line8no, line: line8name)
+    let LINE_5 = LineData(title: "板南線", objects: line5, no: line5no, line: line5name)
+    let LINE_6 = LineData(title: "淡水信義線", objects: line6, no: line6no, line: line6name)
+    let LINE_7 = LineData(title: "文湖線", objects: line7, no: line7no, line: line7name)
+    let LINE_8 = LineData(title: "新北投支線", objects: line8, no: line8no, line: line8name)
     
     LineDataArray.append(LINE_1)
     LineDataArray.append(LINE_2)
